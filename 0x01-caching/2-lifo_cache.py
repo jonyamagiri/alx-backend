@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-""" module 1-lifo_cache.py """
+""" module 2-lifo_cache.py """
 
 from collections import OrderedDict
 from base_caching import BaseCaching
