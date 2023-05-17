@@ -17,7 +17,7 @@
 
 * A caching system in Python is a mechanism that stores the results of expensive or time-consuming operations in memory so that subsequent requests for the same data can be retrieved quickly without re-computing or re-fetching it. It aims to improve the performance and efficiency of an application by reducing the time and resources required for repetitive tasks.
 
-* Here are some key purposes and benefits of a caching system:
+### Key purposes and benefits of a caching system:
 
 - **Faster Data Access:** By caching frequently accessed data, a caching system allows subsequent requests for that data to be served directly from the cache, which is typically much faster than fetching the data from its original source, such as a database or remote service. This reduces the response time of the application and improves user experience.
 - **Reduced Resource Usage:** Caching reduces the need to repeatedly perform expensive operations or retrieve data from slower storage systems. 
