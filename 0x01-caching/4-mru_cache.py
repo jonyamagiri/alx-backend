@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
-""" module 3-lru_cache.py """
+""" module 4-mru_cache.py """
 
 from collections import OrderedDict
 from base_caching import BaseCaching
 
 
-class LRUCache(BaseCaching):
-    """Represents a data structure that implements a Least Recently Used (LRU)
+class MRUCache(BaseCaching):
+    """Represents a data structure that implements a Most Recently Used (MRU)
      mechanism for storing and retrieving items from a dictionary. When the
-      maximum capacity is reached, the least recently accessed item is
+      maximum capacity is reached, the most recently accessed item is
        automatically removed to make space for new entries.
     """
     def __init__(self):
@@ -21,8 +21,9 @@ class LRUCache(BaseCaching):
         if key is not None and item is not None:
             if key not in self.cache_data:
                 if len(self.cache_data) + 1 > self.MAX_ITEMS:
-                    lru_key = self.cache_data.popitem(last=True)[0]
-                    print("DISCARD:", lru_key)
+                    mru_key = next(iter(self.cache_data))
+                    del self.cache_data[mru_key]
+                    print("DISCARD:", mru_key)
             self.cache_data[key] = item
             self.cache_data.move_to_end(key, last=False)
         else:
