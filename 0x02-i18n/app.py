@@ -4,6 +4,7 @@
 from flask import Flask, render_template, request, g
 from flask_babel import Babel
 import pytz
+import datetime
 
 app = Flask(__name__)
 """ instantiates Babel object """
@@ -61,6 +62,14 @@ def before_request():
     g.user = get_user()
 
 
+@app.before_request
+def before_request():
+    """ find user-timezone if any, and set it as a global on flask.g.user """
+    g.user = get_user()
+    utcNow = pytz.utc.localize(datetime.datetime.utcnow())
+    local_time_now = utcNow.astimezone(pytz.timezone(get_timezone()))
+
+
 @babel.timezoneselector
 def get_timezone():
     if 'timezone' in request.args:
@@ -81,7 +90,7 @@ def get_timezone():
 @app.route('/', strict_slashes=False)
 def index() -> str:
     """ Basic Flask App """
-    return render_template('7-index.html')
+    return render_template('index.html')
 
 
 if __name__ == '__main__':
