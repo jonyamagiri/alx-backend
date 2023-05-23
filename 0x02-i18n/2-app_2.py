@@ -1,3 +1,5 @@
+#   alternative (The locale_selector function takes a request object as input and returns the best matching locale for the user. The app.config['LANGUAGES'] setting specifies the list of supported languages.)
+
 #!/usr/bin/env python3
 """ module 2-app.py with a basic Flask app and Babel setup """
 
@@ -20,10 +22,13 @@ class Config(object):
 app.config.from_object(Config)
 
 
-@babel.localeselector
 def get_locale():
     """ gets best match for supported languages in locales """
     return request.accept_languages.best_match(app.config['LANGUAGES'])
+
+
+""" initializes the Babel object and passes in a locale_selector function """
+babel.init_app(app, locale_selector=get_locale)
 
 
 @app.route('/', strict_slashes=False)
