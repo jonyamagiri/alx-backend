@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-""" module 1-app.py with a basic Flask app and Babel setup """
+""" module 2-app.py with a basic Flask app and Babel setup """
 
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from flask_babel import Babel
 
 app = Flask(__name__)
@@ -20,10 +20,18 @@ class Config(object):
 app.config.from_object(Config)
 
 
+def get_locale():
+    """ gets best match for supported languages in locales """
+    return request.accept_languages.best_match(app.config['LANGUAGES'])
+
+
+babel.init_app(app, locale_selector=get_locale)
+
+
 @app.route('/', strict_slashes=False)
 def index() -> str:
     """ Basic Flask App """
-    return render_template('1-index.html')
+    return render_template('2-index.html')
 
 
 if __name__ == '__main__':
